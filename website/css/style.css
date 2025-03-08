@@ -1,0 +1,9 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #1a1a1a;
+    color: #fff;
+    text-align: center;
+}
+h1 { color: #ff4500; }
+img { max-width: 300px; }
+a { color: #00b7eb; }
