@@ -9,5 +9,4 @@
 
 # Explicitly disable Python
 [build.environment]
-  PYTHON_VERSION = "none"   # No Python env - override default
   NODE_VERSION = "16"       # Ensure Node.js for functions (16 is stable)
