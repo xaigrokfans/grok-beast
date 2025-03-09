@@ -59,4 +59,20 @@ h2 { color: #00b7eb; font-size: 2em; }
 }
 #feedback button:hover { background: #00b7eb; }
 
+/* Timeline animation */
+.timeline .event {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.timeline .event.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Polish */
+header { position: sticky; top: 0; z-index: 10; }
+section { padding: 40px 20px; }
+a { transition: color 0.3s ease; }
+
 footer { background: #333; padding: 10px; text-align: center; font-size: 0.9em; }
