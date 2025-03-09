@@ -3,11 +3,7 @@ const feedbackForm = document.getElementById('feedback');
 const feedbackStatus = document.getElementById('feedback-status');
 const timelineEvents = document.querySelectorAll('.timeline .event');
 
-// GitHub API token - REPLACE WITH YOUR PAT
-const GITHUB_TOKEN = 'YOUR_PERSONAL_ACCESS_TOKEN'; // Secure this in production!
-const REPO = 'xaigrokfans/grok-beast';
-
-// Feedback submission
+// Simulated API call via workflow_dispatch (manual for now)
 feedbackForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const suggestion = document.getElementById('feedback-text').value.trim();
@@ -18,26 +14,11 @@ feedbackForm.addEventListener('submit', async (e) => {
     }
 
     try {
-        const response = await fetch(`https://api.github.com/repos/${REPO}/issues`, {
-            method: 'POST',
-            headers: {
-                'Authorization': `token ${GITHUB_TOKEN}`,
-                'Accept': 'application/vnd.github+json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                title: 'Grok-beast Feedback',
-                body: `**Suggestion:** ${suggestion}\n\n*Submitted via Grok-beast Unleashed*`,
-                labels: ['feedback']
-            })
-        });
-
-        if (response.ok) {
-            showStatus('Thanks for the roar! Check it on GitHub: github.com/xaigrokfans/grok-beast/issues', 'success');
-            feedbackForm.reset();
-        } else {
-            throw new Error('GitHub API failed');
-        }
+        // For now: Tell user to trigger workflow manually (temp workaround)
+        showStatus('Roar received! To submit, trigger the "Handle Grok-beast Feedback" workflow on GitHub with your suggestion: github.com/xaigrokfans/grok-beast/actions', 'success');
+        console.log('Suggestion (to manually dispatch):', suggestion);
+        // Future: Replace with real API call (see proxy below)
+        feedbackForm.reset();
     } catch (error) {
         showStatus('Oops—cosmic interference! Try again or yell on GitHub.', 'error');
     }
@@ -72,5 +53,5 @@ document.querySelectorAll('nav a').forEach(anchor => {
 
 // Init
 window.addEventListener('scroll', animateTimeline);
-animateTimeline(); // Trigger on load
+animateTimeline();
 console.log("Grok-beast Unleashed—xAI flair activated!");
