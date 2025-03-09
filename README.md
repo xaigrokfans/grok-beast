@@ -55,3 +55,9 @@ __pycache__/
 
 # Heavy stuff
 simulations/*.tsp  # Add manually if needed
+
+## Notes on LKH
+Grok-beast uses the LKH solver (http://akira.ruc.dk/~keld/research/LKH/) in `src/lkh_wrapper.py`. This is an external C binary, not a Python package. For local runs:
+1. Download LKH-3.0.x from the official site.
+2. Compile and place in `bin/LKH` (update `lkh_wrapper.py` path if needed).
+3. Run `src/main.py`—website doesn’t require LKH.
