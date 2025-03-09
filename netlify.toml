@@ -1,12 +1,7 @@
 [build]
-  base = "."
-  publish = "website/"
-  command = "cd functions && npm install && echo 'Functions ready, skipping site build'"
-  functions = "functions/"
+  command = "npm install"  # Or your build command if you have one
+  publish = "/website"       # Adjust if your static files are elsewhere
+  environment = { NODE_VERSION = "18" }  # Use Node 18 for solid ESM support
 
-[dev]
-  command = ""
-
-[build.environment]
-  PYTHON_VERSION = ""
-  NODE_VERSION = "16"  # Matches package.json
+[functions]
+  node_bundler = "esbuild"  # Helps bundle ESM correctly
