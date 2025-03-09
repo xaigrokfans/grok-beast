@@ -1,6 +1,6 @@
 [build]
   command = "npm install"  # Or your build command if you have one
-  publish = "/website"       # Adjust if your static files are elsewhere
+  publish = "website"       # Adjust if your static files are elsewhere
   environment = { NODE_VERSION = "18" }  # Use Node 18 for solid ESM support
 
 [functions]
