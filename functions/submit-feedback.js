@@ -1,7 +1,8 @@
-// functions/submit-feedback.js
+const fetch = require('node-fetch');
+
 exports.handler = async (event) => {
     const { suggestion } = JSON.parse(event.body);
-    if (!suggestion) return { statusCode: 400, body: 'Missing suggestion' };
+    if (!suggestion) return { statusCode: 400, body: JSON.stringify({ message: 'Missing suggestion' }) };
 
     const response = await fetch('https://api.github.com/repos/xaigrokfans/grok-beast/issues', {
         method: 'POST',
@@ -19,6 +20,6 @@ exports.handler = async (event) => {
 
     return {
         statusCode: response.ok ? 200 : 500,
-        body: JSON.stringify({ message: response.ok ? 'Success' : 'Error' })
+        body: JSON.stringify({ message: response.ok ? 'Feedback submitted!' : 'Error submitting feedback' })
     };
 };
