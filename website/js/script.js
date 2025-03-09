@@ -3,7 +3,6 @@ const feedbackForm = document.getElementById('feedback');
 const feedbackStatus = document.getElementById('feedback-status');
 const timelineEvents = document.querySelectorAll('.timeline .event');
 
-// Simulated API call via workflow_dispatch (manual for now)
 feedbackForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     const suggestion = document.getElementById('feedback-text').value.trim();
@@ -13,18 +12,23 @@ feedbackForm.addEventListener('submit', async (e) => {
         return;
     }
 
-const response = await fetch('/.netlify/functions/submit-feedback', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ suggestion })
-});
-if (response.ok) {
-    showStatus('Thanks for the roar! Check it on GitHub!', 'success');
-    feedbackForm.reset();
-} else {
-    throw new Error('API failed');
-}
+    try {
+        const response = await fetch('/.netlify/functions/submit-feedback', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ suggestion })
+        });
+        const result = await response.json();
 
+        if (response.ok) {
+            showStatus('Thanks for the roar! Check it on GitHub: github.com/xaigrokfans/grok-beast/issues', 'success');
+            feedbackForm.reset();
+        } else {
+            throw new Error(result.message);
+        }
+    } catch (error) {
+        showStatus('Oops—cosmic interference! Try again or yell on GitHub.', 'error');
+    }
 });
 
 function showStatus(message, type) {
