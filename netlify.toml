@@ -1,0 +1,8 @@
+[build]
+  base = "."            # Root of repo
+  publish = "website/"  # Where index.html lives
+  command = ""          # No build step (static for now)
+  functions = "functions/"  # Where we'll put serverless funcs
+
+[dev]
+  command = ""          # Optional: local dev (skip for now)

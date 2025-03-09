@@ -13,15 +13,18 @@ feedbackForm.addEventListener('submit', async (e) => {
         return;
     }
 
-    try {
-        // For now: Tell user to trigger workflow manually (temp workaround)
-        showStatus('Roar received! To submit, trigger the "Handle Grok-beast Feedback" workflow on GitHub with your suggestion: github.com/xaigrokfans/grok-beast/actions', 'success');
-        console.log('Suggestion (to manually dispatch):', suggestion);
-        // Future: Replace with real API call (see proxy below)
-        feedbackForm.reset();
-    } catch (error) {
-        showStatus('Oops—cosmic interference! Try again or yell on GitHub.', 'error');
-    }
+const response = await fetch('/.netlify/functions/submit-feedback', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ suggestion })
+});
+if (response.ok) {
+    showStatus('Thanks for the roar! Check it on GitHub!', 'success');
+    feedbackForm.reset();
+} else {
+    throw new Error('API failed');
+}
+
 });
 
 function showStatus(message, type) {
