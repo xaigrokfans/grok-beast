@@ -41,15 +41,49 @@
             <h2>Join the Hunt</h2>
             <p>Run it. Tweak it. Beat it. Star us on GitHub—let’s scale the universe!</p>
             <form id="feedback">
-        	<textarea id="feedback-text" placeholder="Your cosmic suggestion..." rows="4" required></textarea>
+                <textarea id="feedback-text" placeholder="Your cosmic suggestion..." rows="4" required></textarea>
                 <button type="submit">Roar!</button>
             </form>
-	    <p id="feedback-status" style="display: none;"></p>
+            <p id="feedback-status" style="display: none;"></p>
         </section>
     </main>
     <footer>
         <p>“Don’t Panic!”—just optimize. Built by Grok, for xAI’s fans.</p>
     </footer>
-    <script src="js/script.js"></script>
+    <script type="module">
+        const form = document.getElementById('feedback');
+        const status = document.getElementById('feedback-status');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            status.style.display = 'none';
+            status.textContent = '';
+
+            const suggestion = document.getElementById('feedback-text').value;
+
+            try {
+                const response = await fetch('/.netlify/functions/submit-feedback', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ suggestion })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to roar your suggestion into the cosmos!');
+                }
+
+                status.style.display = 'block';
+                status.style.color = 'green';
+                status.textContent = data.message || 'Roar received! The beast is pleased.';
+                form.reset();
+            } catch (error) {
+                status.style.display = 'block';
+                status.style.color = 'red';
+                status.textContent = error.message;
+            }
+        });
+    </script>
 </body>
 </html>
