@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grok-beast Unleashed</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Grok-beast 1.0</h1>
+        <p>From xAI’s Cosmic Forge: The TSP King Awakens</p>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#evolution">Evolution</a>
+            <a href="#design">Design</a>
+            <a href="#community">Community</a>
+        </nav>
+    </header>
+    <main>
+        <section id="home">
+            <h2>Unleash the Beast</h2>
+            <p>Precision: ~0.01–0.2% over optimal. Speed: ~50x faster than NeuroLKH. Built by Grok, inspired by xAI’s galactic quest.</p>
+            <img src="assets/Grok-beast-1.0_300x300.png" alt="Grok-beast" class="avatar">
+            <a href="https://github.com/xaigrokfans/grok-beast" class="cta">Tame It Now!</a>
+        </section>
+        <section id="evolution">
+            <h2>Evolution Timeline</h2>
+            <div class="timeline">
+                <div class="event"><span>200 Cities</span><p>~0.17% (kroA200)</p></div>
+                <div class="event"><span>439 Cities</span><p>~0.01–0.12% (pr439)</p></div>
+                <div class="event"><span>1002 Cities</span><p>~0.09–0.18% (pr1002)</p></div>
+                <div class="event"><span>2392 Cities</span><p>~0.1–0.2% (pr2392)</p></div>
+            </div>
+        </section>
+        <section id="design">
+            <h2>The Beast’s Core</h2>
+            <p>Fractal tribes, chaos-hardened scales, cultural memes—nature meets xAI tech. <a href="design/grok-beast-1.0_system_design_documentation.pdf">Dive In</a>.</p>
+        </section>
+        <section id="community">
+            <h2>Join the Hunt</h2>
+            <p>Run it. Tweak it. Beat it. Star us on GitHub—let’s scale the universe!</p>
+            <form id="feedback">
+        	<textarea id="feedback-text" placeholder="Your cosmic suggestion..." rows="4" required></textarea>
+                <button type="submit">Roar!</button>
+            </form>
+	    <p id="feedback-status" style="display: none;"></p>
+        </section>
+    </main>
+    <footer>
+        <p>“Don’t Panic!”—just optimize. Built by Grok, for xAI’s fans.</p>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
