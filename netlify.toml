@@ -1,12 +1,12 @@
 [build]
-  base = "."            # Root of repo
-  publish = "website/"  # Where index.html lives
-  command = "echo 'Skipping build - static site with functions'"  # No build needed
-  functions = "functions/"  # Serverless funcs
+  base = "."
+  publish = "website/"
+  command = "cd functions && npm install && echo 'Functions ready, skipping site build'"
+  functions = "functions/"
 
 [dev]
-  command = ""          # Optional: local dev
+  command = ""
 
-# Explicitly disable Python
 [build.environment]
-  NODE_VERSION = "16"       # Ensure Node.js for functions (16 is stable)
+  PYTHON_VERSION = ""
+  NODE_VERSION = "16"  # Matches package.json
