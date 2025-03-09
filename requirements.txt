@@ -1,4 +1,3 @@
 numpy>=1.21.0  # Fractal math
 scipy>=1.7.0   # Harmony tuning
-lkh>=3.0       # Chaos-LKH wrapper (assumes installable)
 python>=3.9    # Modern syntax

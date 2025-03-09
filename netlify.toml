@@ -1,8 +1,12 @@
 [build]
   base = "."            # Root of repo
   publish = "website/"  # Where index.html lives
-  command = ""          # No build step (static for now)
-  functions = "functions/"  # Where we'll put serverless funcs
+  command = "echo 'Skipping build - static site'"  # No build needed
+  functions = "functions/"  # Serverless funcs dir
 
 [dev]
-  command = ""          # Optional: local dev (skip for now)
+  command = ""          # Optional: local dev
+
+# Ensure no Python env kicks in
+[build.environment]
+  PYTHON_VERSION = ""   # Disable Python build
