@@ -8,10 +8,7 @@ export const handler = async (event, context) => {
       return { statusCode: 400, body: JSON.stringify({ error: 'Suggestion is required' }) };
     }
 
-    console.log(`Received suggestion: ${suggestion}`);
-
     const token = process.env.GITHUB_TOKEN;
-    console.log('GITHUB_TOKEN present:', !!token); // Debug: true/false
     if (!token) {
       throw new Error('GitHub token not configured');
     }
@@ -31,15 +28,12 @@ export const handler = async (event, context) => {
       })
     });
 
-    const responseBody = await response.text(); // Capture full response
-    console.log('GitHub API response:', response.status, responseBody); // Debug: status + body
     if (!response.ok) {
-      throw new Error(`GitHub API error: ${response.status} - ${responseBody}`);
+      throw new Error(`GitHub API error: ${response.status} - ${await response.text()}`);
     }
 
     return { statusCode: 200, body: JSON.stringify({ message: 'Feedback submitted successfully' }) };
   } catch (error) {
-    console.error('Error in submit-feedback:', error.message); // Debug: catch errors
     return { statusCode: 500, body: JSON.stringify({ error: error.message || 'Internal server error' }) };
   }
 };
