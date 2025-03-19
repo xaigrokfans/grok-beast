@@ -11,6 +11,7 @@ feedbackForm.addEventListener('submit', async (e) => {
     return;
   }
 
+  showStatus('Submitting...', 'info'); // Temp state
   try {
     const response = await fetch('/.netlify/functions/submit-feedback', {
       method: 'POST',
@@ -26,17 +27,13 @@ feedbackForm.addEventListener('submit', async (e) => {
       throw new Error(result.error || 'Submission failed');
     }
   } catch (error) {
-    console.error('Fetch error:', error);
     showStatus('Oops—cosmic interference! Try again or yell on GitHub.', 'error');
   }
 });
 
-function showStatus(message, type) {
+function show'status(message, type) {
   feedbackStatus.textContent = message;
   feedbackStatus.style.display = 'block';
-  feedbackStatus.style.color = type === 'success' ? '#00b7eb' : '#ff4500';
-  setTimeout(() => { feedbackStatus.style.display = 'none'; }, 5000);
+  feedbackStatus.style.color = type === 'success' ? '#00b7eb' : type === 'info' ? '#ffd700' : '#ff4500';
+  if (type !== 'info') setTimeout(() => { feedbackStatus.style.display = 'none'; }, 5000);
 }
-
-// Other features (timeline, smooth scroll) omitted for brevity
-console.log("Grok-beast Unleashed—xAI flair activated!");

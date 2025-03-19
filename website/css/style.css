@@ -59,6 +59,24 @@ h2 { color: #00b7eb; font-size: 2em; }
 }
 #feedback button:hover { background: #00b7eb; }
 
+/* Add styling for feedback-status, including info state */
+#feedback-status {
+    margin-top: 10px;
+    font-size: 1em;
+    transition: color 0.3s ease; /* Smooth color change */
+}
+
+/* Optional: Class-based fallback if we tweak JS later */
+#feedback-status.info {
+    color: #ffd700; /* Gold for 'Submitting...' */
+}
+#feedback-status.success {
+    color: #00b7eb; /* Cyan for success */
+}
+#feedback-status.error {
+    color: #ff4500; /* Orange-red for error */
+}
+
 /* Timeline animation */
 .timeline .event {
     opacity: 0;
