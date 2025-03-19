@@ -31,7 +31,7 @@ feedbackForm.addEventListener('submit', async (e) => {
   }
 });
 
-function show'status(message, type) {
+function showStatus(message, type) {
   feedbackStatus.textContent = message;
   feedbackStatus.style.display = 'block';
   feedbackStatus.style.color = type === 'success' ? '#00b7eb' : type === 'info' ? '#ffd700' : '#ff4500';
