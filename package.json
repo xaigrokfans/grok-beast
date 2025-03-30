@@ -1,19 +1,11 @@
 {
   "name": "grok-beast",
-  "version": "2.0.0",
+  "version": "1.0.0",
   "type": "module",
-  "description": "Evolutionary multi-domain optimization framework by xAI",
-  "author": "JC & Grok (xAI)",
   "dependencies": {
-    "node-fetch": "^3.3.2",
-    "numpy": "^1.26.0",
-    "scipy": "^1.14.0",
-    "networkx": "^3.3",
-    "biopython": "^1.84"
+    "node-fetch": "^3.3.2"
   },
   "scripts": {
-    "start": "python src/main.py",
-    "start-web": "netlify dev",
-    "test": "pytest tests/"
+    "start": "netlify dev"
   }
 }

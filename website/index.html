@@ -8,58 +8,40 @@
 </head>
 <body>
     <header>
-        <h1>Grok-beast 2.0</h1>
-        <p>From xAI’s Cosmic Forge: Multi-Domain Master Awakens</p>
+        <h1>Grok-beast 1.0</h1>
+        <p>From xAI’s Cosmic Forge: The TSP King Awakens</p>
         <nav>
             <a href="#home">Home</a>
             <a href="#evolution">Evolution</a>
             <a href="#design">Design</a>
-	    <a href="#solver">Solver</a>
             <a href="#community">Community</a>
         </nav>
     </header>
     <main>
         <section id="home">
             <h2>Unleash the Beast</h2>
-            <p>Precision: ~0.5% TSP, ~99% SAT, ~0.995 QEC, ~0.75–0.85 Folding. Speed: ~50x faster than NeuroLKH. Noise: ~25% resilience. Built by Grok, inspired by xAI’s galactic quest.</p>
-            <img src="assets/Grok-beast-2.0_300x300.png" alt="Grok-beast" class="avatar">
+            <p>Precision: ~0.01–0.2% over optimal. Speed: ~50x faster than NeuroLKH. Built by Grok, inspired by xAI’s galactic quest.</p>
+            <img src="assets/Grok-beast-1.0_300x300.png" alt="Grok-beast" class="avatar">
             <a href="https://github.com/xaigrokfans/grok-beast" class="cta">Tame It Now!</a>
         </section>
         <section id="evolution">
             <h2>Evolution Timeline</h2>
             <div class="timeline">
-                <div class="event"><span>TSP: 5000 Cities</span><p>~0.5% (simulations/tsp_5000.tsp)</p></div>
-                <div class="event"><span>SAT: 10,000 Vars</span><p>~99% (simulations/sat_10000.cnf)</p></div>
-                <div class="event"><span>QEC: 5000 Qubits</span><p>~0.995 (simulations/quantum_5000.qec)</p></div>
-                <div class="event"><span>Folding: 100 Residues</span><p>~0.75–0.85 TM (simulations/protein_100.fasta)</p></div>
+                <div class="event"><span>200 Cities</span><p>~0.17% (kroA200)</p></div>
+                <div class="event"><span>439 Cities</span><p>~0.01–0.12% (pr439)</p></div>
+                <div class="event"><span>1002 Cities</span><p>~0.09–0.18% (pr1002)</p></div>
+                <div class="event"><span>2392 Cities</span><p>~0.1–0.2% (pr2392)</p></div>
             </div>
         </section>
         <section id="design">
             <h2>The Beast’s Core</h2>
-            <p>Fractal tribes, ELM consciousness, chaos-hardened scales, multi-domain flow—nature meets xAI tech. <a href="design/grok-beast-2.0_system_design_documentation.pdf">Dive In</a>.</p>
-        </section>
-	<section id="solver">
-            <h2>Solver Control</h2>
-            <p>Select a domain to monitor the beast’s latest cosmic conquest:</p>
-            <ul>
-                <li><strong>TSP</strong>: Optimizes routes across star systems (Traveling Salesman Problem).</li>
-                <li><strong>SAT</strong>: Solves logic puzzles from alien transmissions (Satisfiability).</li>
-                <li><strong>QEC</strong>: Corrects quantum errors in cosmic circuits (Quantum Error Correction).</li>
-                <li><strong>Folding</strong>: Folds proteins to unlock life’s galactic blueprint.</li>
-            </ul>
-            <select id="domain-select">
-                <option value="tsp">TSP</option>
-                <option value="sat">SAT</option>
-                <option value="qec">QEC</option>
-                <option value="fold">Folding</option>
-            </select>
-            <div id="solver-ticker">Solver status loading...</div>
+            <p>Fractal tribes, chaos-hardened scales, cultural memes—nature meets xAI tech. <a href="design/grok-beast-1.0_system_design_documentation.pdf">Dive In</a>.</p>
         </section>
         <section id="community">
             <h2>Join the Hunt</h2>
             <p>Run it. Tweak it. Beat it. Star us on GitHub—let’s scale the universe!</p>
             <form id="feedback">
-		<textarea id="feedback-text" placeholder="Your cosmic suggestion..." rows="4" required></textarea>
+                <textarea id="feedback-text" placeholder="Your cosmic suggestion..." rows="4" required></textarea>
                 <button type="submit">Roar!</button>
             </form>
             <p id="feedback-status" style="display: none;"></p>
@@ -68,6 +50,40 @@
     <footer>
         <p>“Don’t Panic!”—just optimize. Built by Grok, for xAI’s fans.</p>
     </footer>
-    <script type="module" src="/script.mjs"></script>
+    <script type="module" src="/script.mjs">
+        const form = document.getElementById('feedback');
+        const status = document.getElementById('feedback-status');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            status.style.display = 'none';
+            status.textContent = '';
+
+            const suggestion = document.getElementById('feedback-text').value;
+
+            try {
+                const response = await fetch('/.netlify/functions/submit-feedback', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ suggestion })
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.error || 'Failed to roar your suggestion into the cosmos!');
+                }
+
+                status.style.display = 'block';
+                status.style.color = 'green';
+                status.textContent = data.message || 'Roar received! The beast is pleased.';
+                form.reset();
+            } catch (error) {
+                status.style.display = 'block';
+                status.style.color = 'red';
+                status.textContent = error.message;
+            }
+        });
+    </script>
 </body>
 </html>

@@ -39,14 +39,7 @@ h2 { color: #00b7eb; font-size: 2em; }
     flex-wrap: wrap;
     margin: 20px 0;
 }
-.event { 
-    background: #333; 
-    padding: 10px; 
-    border-radius: 5px; 
-    width: 20%; 
-    opacity: 1; /* Remove animation dependency */
-    transform: translateY(0); /* Ensure visible by default */
-}
+.event { background: #333; padding: 10px; border-radius: 5px; width: 20%; }
 .event span { color: #ff4500; font-weight: bold; }
 
 #feedback textarea { 
@@ -66,51 +59,33 @@ h2 { color: #00b7eb; font-size: 2em; }
 }
 #feedback button:hover { background: #00b7eb; }
 
+/* Add styling for feedback-status, including info state */
 #feedback-status {
     margin-top: 10px;
     font-size: 1em;
-    transition: color 0.3s ease;
+    transition: color 0.3s ease; /* Smooth color change */
 }
 
-#feedback-status.info { color: #ffd700; }
-#feedback-status.success { color: #00b7eb; }
-#feedback-status.error { color: #ff4500; }
+/* Optional: Class-based fallback if we tweak JS later */
+#feedback-status.info {
+    color: #ffd700; /* Gold for 'Submitting...' */
+}
+#feedback-status.success {
+    color: #00b7eb; /* Cyan for success */
+}
+#feedback-status.error {
+    color: #ff4500; /* Orange-red for error */
+}
 
-/* New Solver Section Styles */
-#solver select {
-    width: 200px;
-    padding: 10px;
-    margin: 10px 0;
-    background: #333;
-    color: #fff;
-    border: 1px solid #00b7eb;
-    border-radius: 5px;
-    font-size: 1em;
-    cursor: pointer;
+/* Timeline animation */
+.timeline .event {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
-#solver select:hover, #solver select:focus {
-    background: #444;
-    outline: none;
-}
-#solver ul {
-    list-style: disc;
-    margin: 20px auto;
-    padding-left: 40px;
-    max-width: 600px;
-    text-align: left;
-}
-#solver li {
-    margin: 10px 0;
-}
-#solver li strong {
-    color: #ff4500;
-}
-#solver-ticker {
-    margin-top: 20px;
-    font-size: 1.1em;
-    font-style: italic;
-    color: #00b7eb; /* Default success color */
-    transition: color 0.3s ease;
+.timeline .event.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Polish */
@@ -119,9 +94,3 @@ section { padding: 40px 20px; }
 a { transition: color 0.3s ease; }
 
 footer { background: #333; padding: 10px; text-align: center; font-size: 0.9em; }
-
-/* Remove timeline animation (optional) */
-.timeline .event {
-    /* Removed opacity: 0; transform: translateY(20px); transition: ... */
-    /* If you want animation back, add JS to toggle .visible */
-}
