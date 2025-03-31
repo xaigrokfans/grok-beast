@@ -1,0 +1,8 @@
+Added --verbosity arg (0–2).
+Mapped to WARNING, INFO, DEBUG.
+--debug sets verbosity=2 unless overridden.
+Log levels:
+
+    WARNING: Initialization, chaos_two_opt, final solution.
+    INFO: Tribe summaries (post-beast).
+    DEBUG: Beast details (evolve start, solution len, fractal_swap).
