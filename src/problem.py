@@ -91,7 +91,7 @@ class TSPProblem(Problem):
             return self.two_opt(solution)
         return solution
 
-    def two_opt(self, solution):
+    def two_opt_orig(self, solution):
         best = solution[:]
         improved = True
         while improved:
@@ -106,6 +106,29 @@ class TSPProblem(Problem):
                         best[i:j] = best[i:j][::-1]
                         improved = True
             break  # Single pass for efficiency
+        return best
+
+    def two_opt(self, solution, max_iterations=1):
+        best = solution[:]
+        iteration = 0
+        while iteration < max_iterations:
+            improved = False
+            for i in range(1, len(best) - 2):
+                for j in range(i + 2, len(best)):
+                    if j - i == 1:
+                        continue
+                    # Calculate the change in distance (delta)
+                    delta = (self.dist_matrix[best[i-1], best[j-1]] + self.dist_matrix[best[i], best[j]]) - \
+                            (self.dist_matrix[best[i-1], best[i]] + self.dist_matrix[best[j-1], best[j]])
+                    if delta < 0:  # If swapping improves the tour
+                        best[i:j] = best[i:j][::-1]  # Reverse the segment
+                        improved = True
+                        break  # Apply one improvement per iteration
+                if improved:
+                    break
+            if not improved:
+                break  # Stop if no improvement is found
+            iteration += 1
         return best
 
     def extract_signals(self, solution):

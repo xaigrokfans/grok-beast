@@ -8,19 +8,17 @@ class ChaosLKH:
         self.noise_level = noise_level
         self.lkh_path = '/usr/local/bin/LKH'  # Adjust as needed
 
-    def polish(self, solution, problem, trials=1, domain='tsp', problem_name='problem'):
-        logger = logging.getLogger(__name__)
+    def polish(self, solution, problem_data, trials=1, domain='tsp', problem_name='problem'):
         if domain != 'tsp':
             return solution
-
         with tempfile.NamedTemporaryFile(mode='w', suffix='.tsp', delete=False) as tsp_file:
             tsp_file.write(f"NAME: {problem_name}\n")
-            tsp_file.write(f"COMMENT: {len(problem)}-city problem (Grok-beast generated)\n")
+            tsp_file.write(f"COMMENT: {len(problem_data)}-city problem (Grok-beast generated)\n")
             tsp_file.write("TYPE: TSP\n")
-            tsp_file.write(f"DIMENSION: {len(problem)}\n")
+            tsp_file.write(f"DIMENSION: {len(problem_data)}\n")
             tsp_file.write("EDGE_WEIGHT_TYPE: EUC_2D\n")
             tsp_file.write("NODE_COORD_SECTION\n")
-            for i, (x, y) in enumerate(problem, 1):
+            for i, (x, y) in enumerate(problem_data, 1):
                 tsp_file.write(f"{i} {x} {y}\n")
             tsp_file.write("EOF\n")
             tsp_file_path = tsp_file.name
@@ -44,9 +42,9 @@ class ChaosLKH:
             par_file.write("SEED = 1\n")
             par_file_path = par_file.name
 
+        logger = logging.getLogger(__name__)
         logger.debug(f"Running LKH with: {self.lkh_path} {par_file_path}")
-        process = subprocess.run([self.lkh_path, par_file_path], 
-                               capture_output=True, text=True)
+        process = subprocess.run([self.lkh_path, par_file_path], capture_output=True, text=True)
         logger.debug(f"LKH stdout: {process.stdout}")
         logger.debug(f"LKH stderr: {process.stderr}")
 
